@@ -31,18 +31,31 @@ def cli(ctx, input, temperature):
         if code:
             parameters['input'] = code.strip()
 
-    while True:
-        click.echo(parameters['input'])
+    click.echo(parameters['input'])
 
+    while True:
         instruction = click.prompt('', prompt_suffix='>>> ')
+
+        # :d deletes the current input setting to ""
+        if instruction == ':d':
+            parameters['input'] = ""
+            click.echo(parameters['input'])
+            continue
 
         # :q quits the application
         if instruction == ':q':
             ctx.exit(-1)
 
+        # :t followed by a float from 0 to 1 sets the temperature for
+        # subsequent API calls
+        if instruction.startswith(':t'):
+            parameters['temperature'] = float(instruction[2:].strip())
+            continue
+
         # :u undoes the last change
         if instruction == ':u':
             parameters['input'] = previous_input
+            click.echo(parameters['input'])
             continue
 
         # :w followed by a filename writes the current input to a file
@@ -58,3 +71,4 @@ def cli(ctx, input, temperature):
 
         previous_input = parameters['input']
         parameters['input'] = response['choices'][0]['text']
+        click.echo(parameters['input'])
