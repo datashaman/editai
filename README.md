@@ -35,7 +35,7 @@ from OpenAI as the input for the next instruction.
 * `:d` - delete the current input, setting it to "".
 * `:q` - quit the REPL.
 * `:t float` - set the temperature for the next request. Must be value from 0 to 1.
-* `:u` - undo the last change to the input.
+* `:u` - undo the last change to the input. Infinite stack of undos.
 * `:w filename` - write input to a filename.
 * `:!` - execute the input in python.
 
