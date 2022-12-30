@@ -1,4 +1,6 @@
+import io
 import os
+import subprocess
 
 import click
 import dotenv
@@ -44,6 +46,13 @@ def cli(ctx, input, temperature):
         # :! executes the input code in python
         if instruction == ':!':
             exec(parameters['input'])
+            continue
+
+        # :!node, :!js, :!javascript executes the input code in node
+        if instruction in [':!node', ':!js', ':!javascript']:
+            p = subprocess.Popen(['node'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+            output = p.communicate(input=parameters['input'].encode('utf8'))
+            click.echo(output[0].decode('utf8').strip())
             continue
 
         # :d deletes the current input setting to ""
