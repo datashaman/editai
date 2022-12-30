@@ -37,6 +37,7 @@ from OpenAI as the input for the next instruction.
 * `:t float` - set the temperature for the next request. Must be value from 0 to 1.
 * `:u` - undo the last change to the input.
 * `:w filename` - write input to a filename.
+* `:!` - execute the input in python.
 
 If you press Enter, submitting nothing, the current input is displayed.
 
