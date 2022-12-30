@@ -2,6 +2,16 @@
 
 Simple REPL using OpenAI's edit API.
 
+## installation
+
+```
+python setup.py install
+```
+or
+```
+pip install .
+```
+
 ## usage
 
 ```
