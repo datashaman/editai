@@ -34,7 +34,17 @@ def cli(ctx, input, temperature):
     click.echo(parameters['input'])
 
     while True:
-        instruction = click.prompt('', prompt_suffix='>>> ')
+        instruction = click.prompt('', default='', show_default=False, prompt_suffix='>>> ').strip()
+
+        # If instruction is empty, display input
+        if instruction == '':
+            click.echo(parameters['input'])
+            continue
+
+        # :! executes the input code in python
+        if instruction == ':!':
+            exec(parameters['input'])
+            continue
 
         # :d deletes the current input setting to ""
         if instruction == ':d':
@@ -49,7 +59,7 @@ def cli(ctx, input, temperature):
         # :t followed by a float from 0 to 1 sets the temperature for
         # subsequent API calls
         if instruction.startswith(':t'):
-            parameters['temperature'] = float(instruction[2:].strip())
+            parameters['temperature'] = float(instruction[2:].lstrip())
             continue
 
         # :u undoes the last change

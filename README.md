@@ -38,6 +38,8 @@ from OpenAI as the input for the next instruction.
 * `:u` - undo the last change to the input.
 * `:w filename` - write input to a filename.
 
+If you press Enter, submitting nothing, the current input is displayed.
+
 ### sample session
 
 ```
