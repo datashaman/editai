@@ -30,3 +30,59 @@ from OpenAI as the input for the next instruction.
 * `:t float` - set the temperature for the next request. Must be value from 0 to 1.
 * `:u` - undo the last change to the input.
 * `:w filename` - write input to a filename.
+
+### sample session
+
+```
+editai --temperature 0.2
+
+>>> Write a function in python that calculates fibonacci
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(9))
+
+>>> add documentation
+def fibonacci(n):
+    """
+    Returns the nth number in the fibonacci sequence
+    """
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(9))
+
+>>> :d
+
+>>> write a function in javascript that calculate fibonacci
+function fibonacci(n) {
+    if (n < 2) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(5));
+
+>>> :w fib.js
+>>> :q
+
+$ cat fib.js
+function fibonacci(n) {
+    if (n < 2) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log(fibonacci(5));
+```
