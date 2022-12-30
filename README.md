@@ -10,7 +10,8 @@ editai [--input filename] [--temperature float]
 
 If filename is `-` it reads from _stdin_. Temperature is anywhere from 0 to 1, 1 by default.
 
-When prompted, enter an instruction to change the input.
+When prompted, enter an instruction to change the input. The application will use the output
+from OpenAI as the input for the next instruction.
 
 ### special instructions
 
