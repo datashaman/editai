@@ -35,6 +35,8 @@ def cli(ctx, input, temperature):
 
     click.echo(parameters['input'])
 
+    previous_inputs = []
+
     while True:
         instruction = click.prompt('', default='', show_default=False, prompt_suffix='>>> ').strip()
 
@@ -43,8 +45,8 @@ def cli(ctx, input, temperature):
             click.echo(parameters['input'])
             continue
 
-        # :! executes the input code in python
-        if instruction == ':!':
+        # :!, :!python executes the input code in python
+        if instruction in [':!', ':!python']:
             exec(parameters['input'])
             continue
 
@@ -73,8 +75,11 @@ def cli(ctx, input, temperature):
 
         # :u undoes the last change
         if instruction == ':u':
-            parameters['input'] = previous_input
-            click.echo(parameters['input'])
+            if previous_inputs:
+                parameters['input'] = previous_inputs.pop(-1)
+                click.echo(parameters['input'])
+                continue
+            click.echo('No undo left')
             continue
 
         # :w followed by a filename writes the current input to a file
@@ -84,10 +89,14 @@ def cli(ctx, input, temperature):
                 output.write(parameters['input'].encode('utf8'))
             continue
 
+        if instruction.startswith(':'):
+            click.echo('Instruction cannot start with :')
+            continue
+
         parameters['instruction'] = instruction
 
         response = openai.Edit.create(**parameters)
 
-        previous_input = parameters['input']
+        previous_inputs.append(parameters['input'])
         parameters['input'] = response['choices'][0]['text']
         click.echo(parameters['input'])
