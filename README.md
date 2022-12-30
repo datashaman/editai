@@ -37,7 +37,8 @@ from OpenAI as the input for the next instruction.
 * `:t float` - set the temperature for the next request. Must be value from 0 to 1.
 * `:u` - undo the last change to the input. Infinite stack of undos.
 * `:w filename` - write input to a filename.
-* `:!` - execute the input in python.
+* `:! or :!python` - execute the input in python.
+* `:!node or :!js or :!javascript` - execute the input in node.
 
 If you press Enter, submitting nothing, the current input is displayed.
 
