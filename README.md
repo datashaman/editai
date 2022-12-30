@@ -41,7 +41,7 @@ from OpenAI as the input for the next instruction.
 
 If you press Enter, submitting nothing, the current input is displayed.
 
-### sample session
+### sample sessions
 
 #### Fibonacci
 ```
