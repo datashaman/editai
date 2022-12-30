@@ -12,6 +12,13 @@ or
 pip install .
 ```
 
+```
+cp .env.example .env
+vim .env
+```
+
+Set your OpenAI API Key in the `.env` file.
+
 ## usage
 
 ```
